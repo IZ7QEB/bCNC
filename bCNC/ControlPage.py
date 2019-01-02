@@ -859,16 +859,15 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         CNCRibbon.PageLabelFrame.__init__(self, master, "Control", _("Control"), app)
 
 
-        Label(self, text="Z").grid(row=3, column=0,columnspan=2)
+        Label(self, text="Z").grid(row=3, column=0, columnspan=2)
 
-        Label(self, text="Y", width=3).grid(row=4, column=3,rowspan=2)
+        Label(self, text="Y").grid(row=6, column=3)
 
-        Label(self, text="X", width=3, anchor=W).grid(row=3,column=6,
-                columnspan=2)
+        Label(self, text="X").grid(row=3,column=6, columnspan=2)
 
-        Label(self,"",width=1).grid(row=1,column=12)
+        Label(self,"",width=1).grid(row=1,column=10)
 
-        b_width = 3
+        b_width = 2
         b_height = 2
 
         # Default steppings
@@ -940,6 +939,16 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         self.step3_b.bind("<Button-3>", lambda event: self.InputValue("S2"))
         tkExtra.Balloon.set(self.step3_b, _("Use step3"))
         self.addWidget(self.step3_b)
+		
+				
+        b = Button(self, text="m A",
+                    command=self.memA,
+                    width=3,
+                    padx=1, pady=1,
+                    activebackground="LightYellow")
+        b.grid(row=row, column=11, columnspan=2, rowspan=1, sticky=EW)
+        tkExtra.Balloon.set(b, _("Mem A"))
+        self.addWidget(b)
 
         row = 1
 
@@ -982,6 +991,14 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         tkExtra.Balloon.set(b, _("Increase step"))
         self.addWidget(b)
 
+        b = Button(self, text="m B",
+                    command=self.memB,
+                    width=3,
+                    padx=1, pady=1,
+                    activebackground="LightYellow")
+        b.grid(row=row, column=11, columnspan=2, sticky=EW)
+        tkExtra.Balloon.set(b, _("Mem B"))
+        self.addWidget(b)
 
         row = 2
 
@@ -1015,6 +1032,16 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         tkExtra.Balloon.set(b, _("Increase step fine"))
         self.addWidget(b)
 
+
+        b = Button(self, text="line",
+                    command=self.line,
+                    width=3,
+                    padx=1, pady=1,
+                    activebackground="LightYellow")
+        b.grid(row=row, column=11, columnspan=2, sticky=EW)
+        tkExtra.Balloon.set(b, _("Cut Line from A to B"))
+        self.addWidget(b)
+        
 
         row = 4
 
@@ -1050,6 +1077,7 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         b.grid(row=row, column=8, columnspan=2, rowspan=2, sticky=EW)
         tkExtra.Balloon.set(b, _("Move +X +Y"))
         self.addWidget(b)
+
 
         row = 6
 
@@ -1094,6 +1122,7 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         b.grid(row=row, column=8, columnspan=2, rowspan=2, sticky=EW)
         tkExtra.Balloon.set(b, _("Move +X"))
         self.addWidget(b)
+        
 
         row = 7
 
@@ -1105,6 +1134,7 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         tkExtra.Balloon.set(b, _("Use zstep3"))
         self.addWidget(b)
 
+        
 
         row = 8
 
@@ -1140,34 +1170,6 @@ class ControlFrameMod(CNCRibbon.PageLabelFrame):
         b.grid(row=row, column=8,columnspan=2,rowspan=2, sticky=EW)
         tkExtra.Balloon.set(b, _("Move +X -Y"))
         self.addWidget(b)
-
-        row = 11
-
-        b = Button(self, text="m A",
-                    command=self.memA,
-                    width=b_width, height=b_height/2,
-                    activebackground="LightYellow")
-        b.grid(row=row, column=0, columnspan=2, rowspan=1, sticky=EW)
-        tkExtra.Balloon.set(b, _("Mem A"))
-        self.addWidget(b)
-
-        b = Button(self, text="m B",
-                    command=self.memB,
-                    width=b_width, height=b_height/2,
-                    activebackground="LightYellow")
-        b.grid(row=row, column=3, columnspan=2, rowspan=1, sticky=EW)
-        tkExtra.Balloon.set(b, _("Mem B"))
-        self.addWidget(b)
-
-
-        b = Button(self, text="line",
-                    command=self.line,
-                    width=b_width, height=b_height/2,
-                    activebackground="LightYellow")
-        b.grid(row=row, column=5, columnspan=2, rowspan=1, sticky=EW)
-        tkExtra.Balloon.set(b, _("Cut Line from A to B"))
-        self.addWidget(b)
-
 
         try:
 #            self.grid_anchor(CENTER)
